@@ -19,12 +19,12 @@ concurrency:
 
 jobs:
   build:
-    if: github.event_name != 'schedule' || github.repository == 'tt2806/prettier'
+    if: github.event_name != 'schedule' || github.repository == 'tt2806/prettier-copying'
     name: Build
-    uses: tt2806/prettier/.github/workflows/_build.yml@main
+    uses: ./.github/workflows/_build.yml
 
   webpack:
-    if: github.event_name != 'schedule' || github.repository == 'tt2806/prettier'
+    if: github.event_name != 'schedule' || github.repository == 'tt2806/prettier-copying'
     name: Bundle Prettier with webpack
     runs-on: ubuntu-latest
     needs: [build]

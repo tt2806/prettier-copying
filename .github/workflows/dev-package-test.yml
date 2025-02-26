@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   test:
-    if: github.event_name != 'schedule' || github.repository == 'tt2806/prettier'
+    if: github.event_name != 'schedule' || github.repository == 'tt2806/prettier-copying'
     timeout-minutes: 60
     strategy:
       fail-fast: false

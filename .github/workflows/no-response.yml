@@ -1,0 +1,31 @@
+name: No Response
+
+# Both `issue-comment` and `scheduled` event types are required for this action
+# to work properly.
+on:
+  issue_comment:
+    types:
+      - created
+  schedule:
+    # "At 00:00." https://crontab.guru/#0_0_*_*_*
+    - cron: "0 0 * * *"
+
+permissions:
+  issues: write
+
+jobs:
+  no-response:
+    if: github.event_name != 'schedule' || github.repository == 'tt2806/prettier-copying'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lee-dohm/no-response@v0.5.0
+        with:
+          token: ${{ github.token }}
+          daysUntilClose: 14
+          responseRequiredLabel: "status:awaiting response"
+          closeComment: >
+            This issue has been automatically closed because there has been no response
+            to our request for more information from the original author. With only the
+            information that is currently in the issue, we don't have enough information
+            to take action. Please reach out if you have or find the answers we need so
+            that we can investigate further.
